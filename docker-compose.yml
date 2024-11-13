@@ -1,0 +1,16 @@
+services:
+  tor-proxy:
+    image: cslev/tor-proxy:latest
+    container_name: tor-proxy
+    hostname: tor-proxy
+    build:
+      context: .
+      dockerfile: Dockerfile    
+    # ports:
+    #   - "9050:9050"
+    #   - "9051:9051"
+    volumes:
+      # for the logfile
+      - ./log:/var/log/tor/
+      # for the cookie
+      - ./lib:/var/lib/tor/
