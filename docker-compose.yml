@@ -11,6 +11,6 @@ services:
     #   - "9051:9051"
     volumes:
       # for the logfile
-      - ./log:/var/log/tor/
+      - ./log/tor:/var/log/tor/
       # for the cookie
-      - ./lib:/var/lib/tor/
+      - ./lib/tor:/var/lib/tor/
