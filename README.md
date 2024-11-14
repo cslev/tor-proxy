@@ -6,6 +6,14 @@ The container has nothing special in it, you probably find the same Dockerfile s
 I aimed to have a smaller footprint container; hence, this one is based on Alpine.
 
 # Build
+ - via docker
 ```
-$ git clone https://github.com/cslev/tor_proxy
+$ git clone https://github.com/cslev/tor-proxy
+$ sudo docker build -t cslev/tor-proxy:latest .
 ```
+ - via docker-compose
+```
+$ git clone https://github.com/cslev/tor-proxy
+$ sudo docker-compose build
+```
+
