@@ -118,6 +118,7 @@ To force the DNS to go through the proxy too, set the following values to `true`
 network.proxy.socks5_remote_dns
 nework.proxy.socks_remote_dns
 ```
+![Firefox settings](./assets/firefox_socks5_settings.png)
 
 Now, you can use your firefox (or potentially any browser with similar settings) to browse `.onion` sites.
 
