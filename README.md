@@ -125,6 +125,17 @@ For instance, below is a random `.onion` site access via Firefox.
 ![Random onion site](./assets/random_onion_site.png)
 
 
+## via Chromium
+To launch chromium with the proxy, we need to provide the proxy address via a CLI argument.
+```
+chromium --proxy-server="socks5://172.20.0.2:9050"
+```
+![Chromium](./assets/chromium_tor.png)
+We can also access `.onion` sites, like the hidden wiki: 
+
+http://2jwcnprqbugvyi6ok2h2h7u26qc6j5wxm7feh3znlh2qu3h6hjld4kyd.onion/
+![Chromium onion site](./assets/chromium_random_onion_site.png)
+
 Why is this useful? Maybe you have a plugin/extension you want to use that is only available on Chrome. But you want to use it on the darknet. This case, you need this solution
 as the native Tor browser is based on Firefox. But I can have plenty of other reasons to do so.
 
