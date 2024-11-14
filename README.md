@@ -28,6 +28,22 @@ $ sudo docker run --rm --name tor-proxy -d -v ./log/tor:/var/log/tor -v ./lib/to
 $ sudo docker-compose up -d
 ```
 
+Check for the logs to see if the circuit is established
+```
+$ tail -f ./log/tor/tor.log
+its in consensus, using mid) = 0% of path bw.)
+Nov 14 08:18:56.000 [notice] Bootstrapped 50% (loading_descriptors): Loading relay descriptors
+Nov 14 08:18:58.000 [notice] The current consensus contains exit nodes. Tor can build exit and internal paths.
+Nov 14 08:18:59.000 [notice] Bootstrapped 57% (loading_descriptors): Loading relay descriptors
+Nov 14 08:19:00.000 [notice] Bootstrapped 62% (loading_descriptors): Loading relay descriptors
+Nov 14 08:19:01.000 [notice] Bootstrapped 70% (loading_descriptors): Loading relay descriptors
+Nov 14 08:19:01.000 [notice] Bootstrapped 75% (enough_dirinfo): Loaded enough directory info to build circuits
+Nov 14 08:19:02.000 [notice] Bootstrapped 90% (ap_handshake_done): Handshake finished with a relay to build circuits
+Nov 14 08:19:02.000 [notice] Bootstrapped 95% (circuit_create): Establishing a Tor circuit
+Nov 14 08:19:03.000 [notice] Bootstrapped 100% (done): Done
+```
+Once you see 100%, you are good to go.
+
 # Control - Create a new circuit
 As can be seen in the `Dockerfile`, the tor-proxy is set not to change and re-establish new circuits every time a request is sent to it.
 This is set by me in an attempt to reduce the overall latency. On the other hand, remote control is enabled via the `ControlPort` directive.
