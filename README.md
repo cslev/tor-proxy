@@ -1,7 +1,8 @@
 # Dockerized ToR proxy
 This is a simple Dockerized Tor proxy that can be used with other containers or host applications to communicate easily through the Tor network.
 
-The container has nothing special in it, you probably find the same Dockerfile somewhere else too.
+The container has extraordinary in it, you probably find similar Dockerfiles somewhere else too. Or make you own using instructions found on the net or via ChatGPT.
+I just packaged everything together for my own pleasure ;)
 
 I aimed to have a smaller footprint container; hence, this one is based on Alpine.
 
