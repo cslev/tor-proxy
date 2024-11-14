@@ -121,6 +121,9 @@ nework.proxy.socks_remote_dns
 ![Firefox settings](./assets/firefox_socks5_settings.png)
 
 Now, you can use your firefox (or potentially any browser with similar settings) to browse `.onion` sites.
+For instance, below is a random `.onion` site access via Firefox.
+![Random onion site](./assets/random_onion_site.png)
+
 
 Why is this useful? Maybe you have a plugin/extension you want to use that is only available on Chrome. But you want to use it on the darknet. This case, you need this solution
 as the native Tor browser is based on Firefox. But I can have plenty of other reasons to do so.
