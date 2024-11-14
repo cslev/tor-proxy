@@ -34,11 +34,78 @@ The remote control is possible through Cookie-based authentication, which is gen
 That's why we add volume to our container in the `docker run` command or in the `docker-compose.yml`; to have access to that cookie file 
 (besides the logs) on the host.
 
-We need 
+We need to read that binary file as a pure hex string and provide it as an AUTH COOKIE when sending a request to the tor proxy.
+To get the string:
+```
+$ COOKIE=$(sudo hexdump -e '32/1 "%02x""\n"' ./lib/tor/control_auth_cookie)
+$ sudo echo -ne "AUTHENTICATE ${COOKIE}\r\nSIGNAL NEWNYM\r\n" | nc 172.17.0.2 9051
+250 OK
+250 OK
+```
+The last IP address is the IP address of the tor proxy container. Normally, you can just simply expose the port and send queries to the `localhost`.
+If you don't know the  IP of the container, you can run [this script](https://github.com/cslev/find_veth_docker).
+
+Alternatively, you can get the IP by inspecting the container's network like this:
+```
+$ sudo docker network inspect tor-proxy_default |grep IPv4Address
+                "IPv4Address": "172.20.0.2/16",
+```
 
 
 # Use
+How to test and use the tunnel? Let's check first what our IP is via `curl`:
+```
+$ curl  -s https://check.torproject.org |grep "<h1" -A 6
+<h1 class="off">
+    
+      Sorry. You are not using Tor.
+    
+  </h1>
+  <p>Your IP address appears to be:  <strong>YOUR_PUBLIC_IP_HERE</strong></p>
+```
+
 ## via curl
+Now, use the tor-proxy as a socks5 proxy:
+```
+$ curl  -s --socks5-hostname 172.20.0.2:9050  https://check.torproject.org |grep "<h1" -A 6 
+  <h1 class="not">
+    
+      Congratulations. This browser is configured to use Tor.
+    
+  </h1>
+  <p>Your IP address appears to be:  <strong>103.251.167.10</strong></p>
+```
+Normally, this also works with `.onion` links. Let's try it:
+```
+curl --socks5-hostname 172.20.0.2:9050 http://2jwcnprqbugvyi6ok2h2h7u26qc6j5wxm7feh3znlh2qu3h6hjld4kyd.onion/
+...
+[HTML]
+...
+```
+And, it works, at least at the time of writing. `.onion` websites come and go, so try with a `.onion` link that is also working using the Tor browser.
 
 ## via Firefox
+With Firefox, if we want to route traffic through the tor proxy we need to set it as a SOCKS5 proxy. Do not set it as any other proxy, e.g., HTTP/HTTPS. 
+Once you opened Firefox, go to `about:config`, and type the following into the search bar:
+```
+socks
+```
+Then, you will several key-value pairs we need to set as follows 
+```
+network.proxy.socks = 172.20.0.2
+network.proxy.socks_port = 9050
+```
+This only routes browsing traffic through the Tor network, but `.onion` wouldn't work as the DNS you use has no idea about them.
+To force the DNS to go through the proxy too, set the following values to `true`:
+```
+network.proxy.socks5_remote_dns
+nework.proxy.socks_remote_dns
+```
+Now, you can use your firefox (or potentially any browser with similar settings) to browse `.onion` sites.
+
+Why is this useful? Maybe you have a plugin/extension you want to use that is only available on Chrome. But you want to use it on the darknet. This case, you need this solution
+as the native Tor browser is based on Firefox. But I can have plenty of other reasons to do so.
+
+
+
 
