@@ -118,6 +118,8 @@ To force the DNS to go through the proxy too, set the following values to `true`
 network.proxy.socks5_remote_dns
 nework.proxy.socks_remote_dns
 ```
+![Firefox settings](./assets/firefox_socks5_settings.png)
+
 Now, you can use your firefox (or potentially any browser with similar settings) to browse `.onion` sites.
 
 Why is this useful? Maybe you have a plugin/extension you want to use that is only available on Chrome. But you want to use it on the darknet. This case, you need this solution
