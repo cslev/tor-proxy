@@ -6,7 +6,13 @@ I just packaged everything together for my own pleasure ;)
 
 I aimed to have a smaller footprint container; hence, this one is based on Alpine.
 
-# Build
+# Obtain the docker container
+## Method 1: Get the image from docker hub
+```
+$ sudo docker pull cslev/tor-proxy:latest
+```
+
+## Method 2: Build
  - via docker
 ```
 $ git clone https://github.com/cslev/tor-proxy
