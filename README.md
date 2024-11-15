@@ -64,7 +64,7 @@ $ COOKIE=$(sudo hexdump -e '32/1 "%02x""\n"' ./lib/tor/control_auth_cookie)
 ```
 Then, to initiate a new circuit establishment, do this:
 ```
-$ sudo echo -ne "AUTHENTICATE ${COOKIE}\r\nSIGNAL NEWNYM\r\n" | nc 172.17.0.2 9051
+$ sudo echo -ne "AUTHENTICATE ${COOKIE}\r\nSIGNAL NEWNYM\r\n" | nc 172.20.0.2 9051
 250 OK
 250 OK
 ```
