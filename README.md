@@ -6,7 +6,13 @@ I just packaged everything together for my own pleasure ;)
 
 I aimed to have a smaller footprint container; hence, this one is based on Alpine.
 
-# Build
+# Obtain the docker container
+## Method 1: Get the image from docker hub
+```
+$ sudo docker pull cslev/tor-proxy:latest
+```
+
+## Method 2: Build
  - via docker
 ```
 $ git clone https://github.com/cslev/tor-proxy
@@ -55,7 +61,10 @@ We need to read that binary file as a pure hex string and provide it as an AUTH 
 To get the string:
 ```
 $ COOKIE=$(sudo hexdump -e '32/1 "%02x""\n"' ./lib/tor/control_auth_cookie)
-$ sudo echo -ne "AUTHENTICATE ${COOKIE}\r\nSIGNAL NEWNYM\r\n" | nc 172.17.0.2 9051
+```
+Then, to initiate a new circuit establishment, do this:
+```
+$ sudo echo -ne "AUTHENTICATE ${COOKIE}\r\nSIGNAL NEWNYM\r\n" | nc 172.20.0.2 9051
 250 OK
 250 OK
 ```
