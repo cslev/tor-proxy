@@ -12,7 +12,9 @@ RUN echo "SOCKSPort 0.0.0.0:9050" >> /etc/tor/torrc && \
   echo "CookieAuthFile /var/lib/tor/control_auth_cookie" >> /etc/tor/torrc && \
   echo "CookieAuthFileGroupReadable 1" >> /etc/tor/torrc && \
   echo "DataDirectoryGroupReadable 1" >> /etc/tor/torrc && \
-  echo "Log notice file /var/log/tor/tor.log" >> /etc/tor/torrc
+  echo "Log notice file /var/log/tor/tor.log" >> /etc/tor/torrc && \
+  echo "Log notice stdout" >> /etc/tor/torrc
+
  
 # only for debug
 #RUN echo "Log debug file /var/log/tor/tor-debug.log" >> /etc/tor/torrc

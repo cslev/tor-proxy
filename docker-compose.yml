@@ -5,11 +5,13 @@ services:
     hostname: tor-proxy
     build:
       context: .
-      dockerfile: Dockerfile    
+      dockerfile: Dockerfile
     # ports:
     #   - "9050:9050"
     #   - "9051:9051"
     volumes:
+      - /etc/localtime:/etc/localtime:ro # for local timezone and timestamps
+      - /etc/timezone:/etc/timezone:ro # for local timezone and timestamps
       # for the logfile
       - ./log/tor:/var/log/tor/
       # for the cookie
